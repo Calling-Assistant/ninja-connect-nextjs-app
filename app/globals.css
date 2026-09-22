@@ -1,0 +1,373 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  /* Scale down the entire UI to be more compact and professional */
+  font-size: 80%;
+}
+html,
+body {
+  overscroll-behavior-y: contain;
+  /* Prevent unwanted layout shifts */
+  overflow: hidden;
+}
+html, body, #__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optimization: Hardware acceleration for all animations */
+.accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+.animate-pulse-ring {
+  animation: pulse-ring 2s infinite;
+}
+
+/* --- Advanced Screensaver Effects --- */
+@keyframes nebula-morph {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  33% { transform: translate(-50%, -52%) rotate(120deg) scale(1.1); border-radius: 60% 40% 30% 70% / 50% 60% 40% 60%; }
+  66% { transform: translate(-48%, -48%) rotate(240deg) scale(0.9); border-radius: 30% 60% 70% 40% / 50% 30% 60% 40%; }
+  100% { transform: translate(-50%, -50%) rotate(360deg) scale(1); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+}
+.animate-nebula-morph-slow {
+  animation: nebula-morph 80s ease-in-out infinite;
+  will-change: transform, border-radius;
+  transform: translateZ(0);
+}
+.animate-nebula-morph-fast {
+  animation: nebula-morph 50s ease-in-out infinite reverse;
+  will-change: transform, border-radius;
+  transform: translateZ(0);
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8) translate3d(0,0,0); }
+  50% { opacity: 1; transform: scale(1.2) translate3d(0,0,0); }
+}
+.animate-star-twinkle {
+  animation: star-twinkle var(--twinkle-duration) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay);
+  will-change: opacity, transform;
+}
+
+/* --- Spiral breathing animations --- */
+@keyframes rotate-slow {
+  from { transform: rotate(0deg) translateZ(0); }
+  to { transform: rotate(360deg) translateZ(0); }
+}
+.animate-rotate-slow {
+  animation: rotate-slow 120s linear infinite;
+}
+
+@keyframes dot-breathe {
+  0%, 100% { opacity: 0.2; transform: scale(0.85) translateZ(0); }
+  50% { opacity: 0.65; transform: scale(1.15) translateZ(0); }
+}
+.animate-dot-breathe {
+  animation: dot-breathe 8s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* --- Charging Effects --- */
+@keyframes liquid-wave {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.animate-liquid-wave {
+  animation: liquid-wave 5s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@keyframes charging-particle {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate3d(var(--x-offset), -100vh, 0); opacity: 0; }
+}
+.animate-charging-particle {
+  animation: charging-particle var(--duration) ease-in infinite;
+  animation-delay: var(--delay);
+  will-change: transform, opacity;
+}
+
+/* --- Glass UI Styles --- */
+.glass,
+.glass * {
+  color: white !important;
+}
+.glass main,
+.glass .bg-slate-100.dark\:bg-slate-900 {
+  background-color: transparent !important;
+}
+.glass header {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.glass.dark header {
+  background: rgba(26, 32, 44, 0.3) !important;
+}
+.glass .bg-white.dark\:bg-slate-800 {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+.glass.dark .bg-white.dark\:bg-slate-800 {
+  background-color: rgba(45, 55, 72, 0.25) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.glass nav.flex {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+.glass.dark nav.flex {
+  background-color: rgba(45, 55, 72, 0.25) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+/* Settings: outer section and scroll container */
+.glass .bg-slate-50.dark\:bg-slate-900\/40 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.glass.dark .bg-slate-50.dark\:bg-slate-900\/40 {
+  background-color: rgba(26, 32, 44, 0.25) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.glass .bg-white.dark\:bg-slate-800\/40 {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+.glass.dark .bg-white.dark\:bg-slate-800\/40 {
+  background-color: rgba(45, 55, 72, 0.2) !important;
+}
+/* Settings: category headers and footer */
+.glass .bg-slate-50.dark\:bg-slate-900\/60 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+.glass.dark .bg-slate-50.dark\:bg-slate-900\/60 {
+  background-color: rgba(15, 20, 30, 0.15) !important;
+}
+
+.glass .bg-black\/50 {
+  background-color: rgba(0,0,0,0.3) !important;
+}
+
+/* --- Glass UI: Light opaque backgrounds → semi-transparent --- */
+/* catch-all for standalone bg-slate-50 (not already handled above) */
+.glass .bg-slate-50 {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+.glass .bg-slate-100,
+.glass .bg-slate-200,
+.glass .bg-slate-300 {
+  background-color: rgba(255, 255, 255, 0.14) !important;
+}
+/* Colored light badges/chips/cards */
+.glass .bg-indigo-50,
+.glass .bg-indigo-100,
+.glass .bg-indigo-200 {
+  background-color: rgba(99, 102, 241, 0.3) !important;
+}
+.glass .bg-green-100, .glass .bg-green-200 {
+  background-color: rgba(34, 197, 94, 0.28) !important;
+}
+.glass .bg-cyan-100 {
+  background-color: rgba(6, 182, 212, 0.28) !important;
+}
+.glass .bg-amber-50, .glass .bg-amber-100 {
+  background-color: rgba(245, 158, 11, 0.28) !important;
+}
+.glass .bg-amber-200 {
+  background-color: rgba(245, 158, 11, 0.35) !important;
+}
+.glass .bg-red-50, .glass .bg-red-100 {
+  background-color: rgba(239, 68, 68, 0.28) !important;
+}
+
+/* --- Glass UI: Hover states --- */
+/* Light hover → translucent white (readable with white text) */
+.glass .hover\:bg-slate-50:hover,
+.glass .hover\:bg-slate-200:hover,
+.glass .hover\:bg-slate-300:hover {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+}
+/* Dark hover → lightened translucent */
+.glass .hover\:bg-slate-700\/30:hover,
+.glass .hover\:bg-slate-700\/50:hover,
+.glass .hover\:bg-slate-500:hover,
+.glass .hover\:bg-slate-600:hover {
+  background-color: rgba(255, 255, 255, 0.18) !important;
+}
+/* Colored hover — keep saturated for affordance */
+.glass .hover\:bg-indigo-200:hover {
+  background-color: rgba(99, 102, 241, 0.45) !important;
+}
+.glass .hover\:bg-indigo-700:hover {
+  background-color: rgba(67, 56, 202, 0.9) !important;
+}
+.glass .hover\:bg-indigo-900:hover {
+  background-color: rgba(49, 46, 129, 0.9) !important;
+}
+.glass .hover\:bg-amber-100:hover,
+.glass .hover\:bg-amber-900\/30:hover {
+  background-color: rgba(245, 158, 11, 0.35) !important;
+}
+.glass .hover\:bg-red-100:hover,
+.glass .hover\:bg-red-900\/30:hover {
+  background-color: rgba(239, 68, 68, 0.35) !important;
+}
+.glass .hover\:bg-red-600:hover   { background-color: rgba(220, 38, 38, 0.9) !important; }
+.glass .hover\:bg-amber-600:hover { background-color: rgba(217, 119, 6, 0.9) !important; }
+.glass .hover\:bg-green-600:hover { background-color: rgba(22, 163, 74, 0.9) !important; }
+.glass .hover\:bg-white\/20:hover { background-color: rgba(255, 255, 255, 0.28) !important; }
+
+/* --- Glass UI: Active / selected nav tab --- */
+.glass .bg-indigo-50.dark\:bg-indigo-900\/30 {
+  background-color: rgba(99, 102, 241, 0.38) !important;
+}
+
+/* --- Glass UI: Inputs / textareas / selects --- */
+/* Resting: semi-transparent with white text */
+.glass input,
+.glass textarea,
+.glass select {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+.glass input::placeholder,
+.glass textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+/* Focus: reversed — near-white background, dark text for readability */
+.glass input:focus,
+.glass textarea:focus,
+.glass select:focus {
+  background-color: rgba(255, 255, 255, 0.88) !important;
+  color: #1e293b !important;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35) !important;
+  outline: none !important;
+}
+.glass input:focus::placeholder,
+.glass textarea:focus::placeholder {
+  color: rgba(30, 41, 59, 0.4) !important;
+}
+
+/* --- Glass UI: Focus rings --- */
+.glass .focus\:ring-indigo-500:focus {
+  --tw-ring-color: rgba(255, 255, 255, 0.45) !important;
+}
+.glass .focus\:ring-offset-2:focus,
+.glass .focus\:ring-offset-slate-800:focus {
+  --tw-ring-offset-color: transparent !important;
+}
+
+/* --- Glass UI: Borders → semi-transparent --- */
+.glass .border-slate-100,
+.glass .border-slate-200,
+.glass .border-slate-300 {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+.glass .border-slate-600,
+.glass .border-slate-700,
+.glass .border-slate-800 {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.glass .border-indigo-100, .glass .border-indigo-200 {
+  border-color: rgba(99, 102, 241, 0.35) !important;
+}
+.glass .border-amber-100, .glass .border-amber-200,
+.glass .border-amber-800\/30 {
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+.glass .border-red-100, .glass .border-red-900\/30 {
+  border-color: rgba(239, 68, 68, 0.35) !important;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Optimization: content-visibility for sections that aren't always active */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
+}
+
+/* ── Reduced-motion: disable all decorative animations ────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-nebula-morph-slow,
+  .animate-nebula-morph-fast,
+  .animate-star-twinkle,
+  .animate-dot-breathe,
+  .animate-rotate-slow,
+  .animate-charging-particle,
+  .animate-liquid-wave,
+  .animate-pulse-ring,
+  .animate-fade-in,
+  .animate-fade-in-up {
+    animation: none !important;
+    will-change: auto !important;
+  }
+}

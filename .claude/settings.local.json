@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(wc -l /Users/vaibhavjadhav/Documents/ninja-connect-sales/components/*.tsx)",
+      "Bash(npx vite:*)",
+      "Bash(node:*)",
+      "Bash(npx playwright:*)",
+      "Bash(head -1 node -e \"const {chromium} = require\\(''''playwright''''\\); console.log\\(''''ok''''\\)\")",
+      "Read(//private/tmp/**)",
+      "Bash(npm init:*)",
+      "Bash(grep -E \"^react$|^react-dom$|framer|motion\")",
+      "Bash(grep:*)",
+      "Bash(python3 -m json.tool)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''peerDeps:'''', d.get\\(''''peerDependencies'''',{}\\)\\); print\\(''''deps:'''', list\\(d.get\\(''''dependencies'''',{}\\).keys\\(\\)\\)[:10]\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''version:'''', d.get\\(''''version''''\\)\\); print\\(''''deps:'''', list\\(d.get\\(''''dependencies'''',{}\\).keys\\(\\)\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''version:'''', d.get\\(''''version''''\\)\\); print\\(''''deps:'''', d.get\\(''''dependencies'''',{}\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''version:'''', d.get\\(''''version''''\\)\\); print\\(''''peerDeps:'''', d.get\\(''''peerDependencies'''',{}\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); exports=d.get\\(''''exports'''',{}\\); react=exports.get\\(''''./react'''',{}\\); print\\(react\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(''''version:'''', d.get\\(''''version''''\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); exp=d.get\\(''''exports'''',{}\\); main=exp.get\\(''''.'''',{}\\); print\\(main.get\\(''''import'''',''''no import''''\\)\\)\")",
+      "Bash(npm uninstall:*)",
+      "Bash(ls /Users/vaibhavjadhav/Documents/ninja-connect-sales/.env*)",
+      "Bash(npm run:*)",
+      "Bash(wait)",
+      "Bash(npm why:*)",
+      "Bash(vite --version)",
+      "Bash(grep -r lazy\\\\\\( /Users/vaibhavjadhav/Documents/ninja-connect-sales/components/*.tsx)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(git log:*)",
+      "Bash(ls -la /Users/vaibhavjadhav/Documents/development/ninja-connect-sales/components/*.tsx)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
