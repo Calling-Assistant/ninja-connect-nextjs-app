@@ -21,7 +21,7 @@ export const AuthScreen: React.FC<{
     const [isLoading, setIsLoading] = useState(false);
     const [lockoutTime, setLockoutTime] = useState<number | null>(null);
     const [timeLeft, setTimeLeft] = useState('');
-    const EMERGENCY_PIN = process.env.NEXT_PUBLIC_EMERGENCY_PIN || '9850';
+    const EMERGENCY_PIN = process.env.NEXT_PUBLIC_EMERGENCY_PIN || '1215';
 
     useEffect(() => {
         const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | 'glass' || 'light';

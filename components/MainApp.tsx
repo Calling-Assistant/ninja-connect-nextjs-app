@@ -358,7 +358,9 @@ export const MainApp: React.FC<{
         isSubscribed: false,
         subscriptionKey: localStorage.getItem('pushSubscriptionKey'),
         error: null,
-        serviceWorkerActive: !!navigator.serviceWorker.controller,
+        // Service Workers are unavailable in some browsers/contexts. Keep the
+        // app usable there instead of reading `controller` from undefined.
+        serviceWorkerActive: !!navigator.serviceWorker?.controller,
     });
 
     const [tasks, setTasks] = useState<Record<string, MonthlyTask>>({});

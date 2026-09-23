@@ -2,8 +2,9 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/database';
 
 // --- Default Firebase Config ---
-// This is used ONLY for the 'Reset to Default' functionality in settings.
-// It is NOT used for initial app load anymore.
+// Environment configuration is used for the initial app load. A config saved
+// from Settings takes precedence, so each deployment can still be re-targeted
+// without rebuilding the app.
 export const DEFAULT_FIREBASE_CONFIG = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -23,6 +24,13 @@ export let api: {
     patch: (path: string, data: any) => Promise<void>;
     get: (path: string) => Promise<any>;
 } | null = null;
+
+const isValidFirebaseConfig = (config: any): boolean => (
+    !!config &&
+    typeof config === 'object' &&
+    typeof config.apiKey === 'string' && config.apiKey.length > 0 &&
+    typeof config.databaseURL === 'string' && config.databaseURL.length > 0
+);
 
 
 const createApi = (db: firebase.database.Database) => ({
@@ -59,24 +67,33 @@ export const initializeFirebase = async (config: object): Promise<boolean> => {
 
 
 // --- Initial Load Attempt ---
-// Try to initialize Firebase on script load if a config is already in localStorage.
-// If it fails or no config is found, 'database' and 'api' will remain null,
-// and the app will start in a limited, unconfigured state.
+// Prefer a config saved in Settings, then use the deployment's environment
+// config. If neither is available, the app starts in limited mode and exposes
+// the emergency PIN flow.
 if (typeof window !== 'undefined') {
+    let configToUse: object | null = null;
+
     try {
         const storedConfigStr = localStorage.getItem('firebaseConfig');
         if (storedConfigStr) {
             const storedConfig = JSON.parse(storedConfigStr);
-            // Basic validation
-            if (storedConfig && typeof storedConfig === 'object' && storedConfig.apiKey && storedConfig.databaseURL) {
-                initializeFirebase(storedConfig);
+            if (isValidFirebaseConfig(storedConfig)) {
+                configToUse = storedConfig;
             } else {
-                 console.warn("Invalid Firebase config found in localStorage.");
-                 localStorage.removeItem('firebaseConfig');
+                console.warn("Invalid Firebase config found in localStorage.");
+                localStorage.removeItem('firebaseConfig');
             }
         }
     } catch (e) {
         console.error("Failed to parse Firebase config from localStorage.", e);
         localStorage.removeItem('firebaseConfig'); // Clear corrupted data
+    }
+
+    if (!configToUse && isValidFirebaseConfig(DEFAULT_FIREBASE_CONFIG)) {
+        configToUse = DEFAULT_FIREBASE_CONFIG;
+    }
+
+    if (configToUse) {
+        initializeFirebase(configToUse);
     }
 }
